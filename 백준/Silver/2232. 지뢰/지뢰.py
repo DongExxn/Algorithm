@@ -1,22 +1,25 @@
 import sys
 
-# 입력 받기
-N = int(sys.stdin.readline().strip())  # 지뢰의 개수 입력
-strengths = [int(sys.stdin.readline().strip()) for _ in range(N)]  # 지뢰의 충격 강도 입력
+n = int(sys.stdin.readline().strip()) 
+strengths = [int(sys.stdin.readline().strip()) for _ in range(n)] 
 
-# 직접 터뜨려야 하는 지뢰를 저장할 리스트
+#터뜨려야 하는 지뢰
 detonations = []
 
-# 각 지뢰에 대해 직접 터뜨려야 하는지 확인
-for i in range(N):
-    # 이전 지뢰와 비교 (첫 번째 지뢰는 앞에 없으므로 0으로 비교)
-    left = strengths[i - 1] if i > 0 else 0
-    # 다음 지뢰와 비교 (마지막 지뢰는 뒤에 없으므로 0으로 비교)
-    right = strengths[i + 1] if i < N - 1 else 0
+for i in range(n):
+    #왼쪽
+    if i > 0:
+        left = strengths[i - 1]  #i가 0보다 클 때는 왼쪽 지뢰 강도
+    else:
+        left = 0  #첫 번째 지뢰일 때
+    #오른쪽
+    if i < n - 1:
+        right = strengths[i + 1]  #i가 마지막 인덱스보다 작을 때는 오른쪽 지뢰 강도
+    else:
+        right = 0  #마지막 지뢰일 때
 
-    # 해당 지뢰가 좌우 지뢰보다 강하다면 터뜨려야 하는 지뢰
+    #지뢰가 양쪽 지뢰보다 강하면 터뜨림
     if left <= strengths[i] >= right:
-        detonations.append(i + 1)  # 인덱스는 1-based이므로 i + 1을 추가
+        detonations.append(i + 1) 
 
-# 결과 출력
 print('\n'.join(map(str, detonations)))
