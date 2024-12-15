@@ -1,14 +1,18 @@
-num = int(input())
+# 입력 처리
+N = int(input())  # 배열의 길이
+A = list(map(int, input().split()))  # 배열 A
+B = list(map(int, input().split()))  # 배열 B
 
-list1 = list(map(int, input().split()))
-list2 = list(map(int, input().split()))
+# A를 오름차순으로 정렬
+A.sort()
 
-list1.sort()
-list2.sort(reverse=True)
+# B를 내림차순으로 정렬
+B.sort(reverse=True)
 
-result = 0
+# S 값 계산
+S = 0
+for i in range(N):
+    S += A[i] * B[i]
 
-for i in range(num):
-    result += list1[i] * list2[i]
-
-print(result)
+# 결과 출력
+print(S)
